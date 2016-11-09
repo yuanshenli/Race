@@ -27,9 +27,9 @@ class ofApp : public ofBaseApp{
         }
     };
     const float initialStarZ = 1000;
-    const float starSpeed = 10;
+    float starSpeed = 10;
     const float moveSpeed = 3;
-    const int starsCount = 100;
+    const int starsCount = 50;
     const float boxSize = 10.0;
     const float bumpRange = 5.0;
     std::vector<Star> stars;
@@ -65,6 +65,7 @@ class ofApp : public ofBaseApp{
     int lastTime = 0;
     int currentTime = 0;
     int timePassed = 0;
+    int lastSpeedUpdateTime = 0;
     // displacement
     float k1,k2;
     int scaleDis = 3000;

@@ -54,6 +54,8 @@ void ofApp::update(){
         isHit = false;
         isGuarded = false;
         ofBackground(200, 200, 200);
+        starSpeed = 7.0;
+        lastSpeedUpdateTime = 0;
         
     }
     
@@ -65,6 +67,11 @@ void ofApp::update(){
 //        sound.play();
         ofBackground(0, 0, 0);          // play
         timePassed += currentTime - lastTime;   // Update timer if the game is running
+        if (timePassed/1000 == (lastSpeedUpdateTime + 10)) {
+            starSpeed += 1;
+            lastSpeedUpdateTime += 10;
+        }
+        cout << timePassed << endl;
     }
     if (score <= 0) {
         finalTimeLeft = gameTime - timePassed/1000;
@@ -181,7 +188,7 @@ void ofApp::draw(){
             line2.addVertex(x2, y1, -trueZ);
             line3.addVertex(x1, y2, -trueZ);
             line4.addVertex(x2, y2, -trueZ);
-            if (z % 20 == 20 - (int)floor(currentFrame) % 20) {
+            if (z % 20 == 20 - ((int)floor(currentFrame)* (int)starSpeed/10) % 20) {
                 ofDrawLine(x1, y1, -trueZ, x2, y1, -trueZ);
                 ofDrawLine(x2, y1, -trueZ, x2, y2, -trueZ);
                 ofDrawLine(x2, y2, -trueZ, x1, y2, -trueZ);
@@ -237,8 +244,8 @@ void ofApp::draw(){
             if (!isPause) {
                 ofTranslate(-140, 0, -180);
                 myfont.drawStringAsShapes("Press [s] to start, Press [p] to pause", 0, 0);
-                myfont.drawStringAsShapes("[1]: Easy", -windowWidth / 5 + 80, -windowWidth / 5 + 40);
-                myfont.drawStringAsShapes("[2]: Hard", -windowWidth / 5 + 80, -windowWidth / 5 + 10);
+                myfont.drawStringAsShapes("[1]: Hard", -windowWidth / 5 + 80, -windowWidth / 5 + 40);
+                myfont.drawStringAsShapes("[2]: Harder", -windowWidth / 5 + 80, -windowWidth / 5 + 10);
             } else {
                 ofTranslate(-70, 0, -180);
                 myfont.drawStringAsShapes("Press [s] to resume", 0, 0);
@@ -257,16 +264,16 @@ void ofApp::draw(){
 
     }
     ofPopMatrix();
-    ofPushMatrix();
-    {
-        if (isInitialState) {
-            ofTranslate( 0, 0, 0);
-            ofSetColor(255,255,0);
-            myfont.drawStringAsShapes("[1]: Hard", 0, 20);
-            myfont.drawStringAsShapes("[2]: Harder", 0, 0);
-        }
-    }
-    ofPopMatrix();
+//    ofPushMatrix();
+//    {
+//        if (isInitialState) {
+//            ofTranslate( 0, 0, 0);
+//            ofSetColor(255,255,0);
+//            myfont.drawStringAsShapes("[1]: Hard", 0, 20);
+//            myfont.drawStringAsShapes("[2]: Harder", 0, 0);
+//        }
+//    }
+//    ofPopMatrix();
     
     cam.end();
     
@@ -279,6 +286,7 @@ void ofApp::keyPressed(int key){
             sound.unload();
             sound.load("beats.mp3");
             gameTime = 60;
+            starSpeed = 7.0;
         }
         
     }
@@ -287,6 +295,7 @@ void ofApp::keyPressed(int key){
             sound.unload();
             sound.load("ninja.mp3");
             gameTime = 155;
+            starSpeed = 5.0;
         }
         
     }
