@@ -16,4 +16,8 @@ Move around and avoid getting hit by the blocks flying at you. You win if your s
 
 * [p] to pause.
 
-* [r] to reset. 
+* [r] to reset.
+
+=====
+## Milestone 1 update
+Chnage of Field of view when hit by block. 
