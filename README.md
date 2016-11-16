@@ -32,10 +32,10 @@ Move around and avoid getting hit by the blocks flying at you. You win if your s
 Code based on Assignment 4. Milestone1 includes a change of Field of view when hit by block. The fov moves closer and then gradually moves back. This creates a more genuine feeling of "getting hit" and also allows a little more time to react and recover from the hit.
 
 ## Screenshots
-![Start Screen](https://github.com/yuanshenli/Race/screenshots/Img1.jpg?raw=true "Start Screen")
-![Game Screen](https://github.com/yuanshenli/Race/screenshots/Img2.jpg?raw=true "Start Screen")
-![Pause Screen](https://github.com/yuanshenli/Race/screenshots/Img3.jpg?raw=true "Start Screen")
-![Result Screen](https://github.com/yuanshenli/Race/screenshots/Img4.jpg?raw=true "Start Screen")
+![Start Screen](https://github.com/yuanshenli/Race/screenshots/Img1.png?raw=true "Start Screen")
+![Game Screen](https://github.com/yuanshenli/Race/screenshots/Img2.png?raw=true "Start Screen")
+![Pause Screen](https://github.com/yuanshenli/Race/screenshots/Img3.png?raw=true "Start Screen")
+![Result Screen](screenshots/Img4.png?raw=true "Start Screen")
 
 
 
