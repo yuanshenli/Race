@@ -70,6 +70,10 @@ class ofApp : public ofBaseApp{
     float k1,k2;
     int scaleDis = 3000;
     
+    float fov;
+//    const int fovCountMax = hitCountMax / 2;
+    int fovCount = 0;
+    bool isFOVChange = false;
     
     ofTrueTypeFont myfont;
     

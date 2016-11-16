@@ -54,9 +54,8 @@ void ofApp::update(){
         isHit = false;
         isGuarded = false;
         ofBackground(200, 200, 200);
-        starSpeed = 7.0;
+        starSpeed = 8.0;
         lastSpeedUpdateTime = 0;
-        
     }
     
     if (!isStart) {
@@ -71,7 +70,7 @@ void ofApp::update(){
             starSpeed += 1;
             lastSpeedUpdateTime += 10;
         }
-        cout << timePassed << endl;
+//        cout << timePassed << endl;
     }
     if (score <= 0) {
         finalTimeLeft = gameTime - timePassed/1000;
@@ -92,6 +91,7 @@ void ofApp::update(){
             hitCount = 0;
             isHit = false;
         }
+        
     }
     // Avoid hitting multiple stars at the same time.
     if (isGuarded) {
@@ -110,6 +110,7 @@ void ofApp::update(){
         + (star.location.y+offsetY) * (star.location.y+offsetY);
         if (isStart && (distance2 < 200) ) {
             isHit = true;
+            isFOVChange = true;
             bumpSound.play();
             if (!isGuarded){
                 score -= 5;
@@ -159,10 +160,49 @@ void ofApp::draw(){
     // This gets called once for each graphical frame, right after update()
     // This is where you draw all the graphics
     cam.begin();
-    cam.setFov(100);
+    if (isInitialState) {
+        cam.setFov(100);
+    }
     cam.setNearClip(1);
     cam.setFarClip(20000);
     // Draw stars
+    fov = cam.getFov();
+    if (isFOVChange) {
+//        if (fovCount <= hitCountMax/2) {
+//            fov -= 3;
+//            cam.setFov(fov);
+//        } else if (fovCount <= hitCountMax) {
+//            fov += 3;
+//            cam.setFov(fov);
+//        }
+//        if (fovCount == 0) {
+//            fov = 25;
+//            cam.setFov(fov);
+//            
+//        } else if(fovCount <= hitCountMax){
+//            fov += 3;
+//            cam.setFov(fov);
+//        }
+//        if (fovCount == hitCountMax) {
+//            fovCount = 0;
+//            if (fov != 100) {
+//                fov = 100;
+//                cam.setFov(fov);
+//            }
+//        } else {
+//            fovCount++;
+//        }
+        fov = 50;
+        cam.setFov(fov);
+        isFOVChange = false;
+        
+        
+    } else if (fov != 100) {
+//        fovCount = 0;
+        fov += 1;
+        cam.setFov(fov);
+    }
+    cout << fov  << endl;
     ofPushMatrix(); // Save our state for later
     
     {
@@ -261,20 +301,8 @@ void ofApp::draw(){
             myfont.drawStringAsShapes("Time left: ", 20, -20);
             myfont.drawStringAsShapes(std::to_string(finalTimeLeft), 140, -20);
         }
-
     }
     ofPopMatrix();
-//    ofPushMatrix();
-//    {
-//        if (isInitialState) {
-//            ofTranslate( 0, 0, 0);
-//            ofSetColor(255,255,0);
-//            myfont.drawStringAsShapes("[1]: Hard", 0, 20);
-//            myfont.drawStringAsShapes("[2]: Harder", 0, 0);
-//        }
-//    }
-//    ofPopMatrix();
-    
     cam.end();
     
 }
